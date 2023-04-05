@@ -52,3 +52,7 @@ results.save(save_dir="results/")
 
 
 """>>> +++如果输入的图片很大的话,需要使用到slice inference, SAHI这个包可以使用; """
+
+
+
+In our pipeline, we train an item recognition model on our company's item dataset using a specific learning rate, optimizer, and learning rate scheduler. The item dataset consists of over 100K images across around 2000 classes. Specifically, the recognition model utilizes a lightweight deep neural network called EfficientNet-B0 as its backbone and MagFace loss function to map the embeddings of items to a super-sphere space and make the embeddings extremely separatable. In our training process, the EfficientNet is first pretrained on the ImageNet dataset, which contains over 1.2 million images, and then finetuned on our item dataset with a start learning rate of 0.001, batch size 128, and input image size 224x224. This learning rate will be adjusted using the multiple-step learning rate scheduler during the training. For the optimizer, we apply the Adam optimizer with weight decay 1e-4 to update the gradient during the backpropagation process. Finally, we train our model for 50 epochs to get the optimized feature bank for each class used for item recognition. 
